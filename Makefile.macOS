@@ -1,0 +1,11 @@
+BREW_PATH=/Users/mitsuji/apps/homebrew
+
+all:
+	gcc -c -I$(BREW_PATH)/include ichigojam.c -o out/ichigojam.o
+	gcc -c -I$(BREW_PATH)/include kawakudari.c -o out/kawakudari.o
+	gcc -L$(BREW_PATH)/lib -lallegro -lallegro_primitives -lallegro_main -o kawakudari out/ichigojam.o out/kawakudari.o
+
+clean:
+	rm kawakudari
+	rm out/ichigojam.o
+	rm out/kawakudari.o

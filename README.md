@@ -53,12 +53,26 @@ It will allow programming for [IchigoJam](https://ichigojam.net/index-en.html)-l
 
 [Download](https://gcc.gnu.org/) and install GCC suitable for your environment.
 
+## Preparation
+
+Adjust contents of Makefile.* to suit your environment.
+```
+BREW_PATH=/Users/mitsuji/apps/homebrew
+```
+
+
 ## How to use
 
-To build it
+To build it (Linux)
 ```
-$ make
+$ make -f Makefile.linux
 ```
+
+To build it (macOS)
+```
+$ make -f Makefile.macOS
+```
+
 
 To run it
 ```

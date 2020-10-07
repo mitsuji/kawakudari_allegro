@@ -155,6 +155,12 @@ static void draw_char(STD15 * self, int cx, int cy, char c)
 }
 
 
+/**
+ *
+ *  CC BY IchigoJam & mitsuji.org
+ *  https://mitsuji.github.io/ichigojam-font.json/
+ *
+ */
 static uint64_t ICHIGOJAM_FONT [] = {
   0x0000000000000000L,
   0xffffffffffffffffL,

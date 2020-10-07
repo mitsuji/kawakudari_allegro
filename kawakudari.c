@@ -41,7 +41,12 @@ int main()
           ij_locate(std15,rand()%32,23);
           ij_putc(std15,'*');
           ij_scroll(std15);
-          if (ij_scr(std15,x,5) != '\0') running = FALSE;
+          if (ij_scr(std15,x,5) != '\0') {
+	    ij_locate(std15,0,23);
+	    ij_putstr(std15,"Game Over...");
+	    ij_putnum(std15,frame);
+	    running = FALSE;
+	  }
         }
         ij_draw_screen(std15);
         ++ frame;

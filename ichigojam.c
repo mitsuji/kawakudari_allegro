@@ -1,6 +1,7 @@
 #include "ichigojam.h"
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <allegro5/allegro_primitives.h>
 
 static uint64_t ICHIGOJAM_FONT [];
@@ -38,6 +39,28 @@ void ij_locate(STD15 * self, int x, int y) {
 
 void ij_putc(STD15 * self, char c) {
   set_char(self, self->cursor_x, self->cursor_y, c);
+  if(self->cursor_x < self->buff_w-1) {
+    self->cursor_x ++;
+  } else {
+    if(self->cursor_y < self->buff_h-1) {
+      self->cursor_x = 0;
+      self->cursor_y ++;
+    }
+  }
+}
+
+void ij_putstr(STD15 * self, const char * s) {
+  char * c = (char *)s;
+  while ((*c) != '\0') {
+    ij_putc(self,(*c));
+    c++;
+  }
+}
+
+void ij_putnum(STD15 * self, int n) {
+  char buff [12];
+  sprintf(buff,"%d",n);
+  ij_putstr(self,buff);
 }
 
 char ij_scr(STD15 * self, int x ,int y) {

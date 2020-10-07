@@ -22,7 +22,7 @@ int main()
   al_register_event_source(queue, al_get_display_event_source(disp));
   al_register_event_source(queue, al_get_timer_event_source(timer));
 
-  std15_init(512,384,32,24);
+  STD15 * std15 = ij_create_std15(512,384,32,24);
   unsigned int frame = 0;
   int x = 15;
   int running = TRUE;
@@ -36,14 +36,14 @@ int main()
       if(al_is_event_queue_empty(queue)) {
         if (!running) break;
         if (frame % 5 == 0) {
-          locate(x,5);
-          putc_('0');
-          locate(rand()%32,23);
-          putc_('*');
-          scroll();
-          if (scr(x,5) != '\0') running = FALSE;
+          ij_locate(std15,x,5);
+          ij_putc(std15,'0');
+          ij_locate(std15,rand()%32,23);
+          ij_putc(std15,'*');
+          ij_scroll(std15);
+          if (ij_scr(std15,x,5) != '\0') running = FALSE;
         }
-        draw();
+        ij_draw_screen(std15);
         ++ frame;
       }
       break;
@@ -63,7 +63,7 @@ int main()
   }
 
 SHUTDOWN:
-  std15_destroy();
+  ij_destroy_std15(std15);
   al_destroy_timer(timer);
   al_destroy_display(disp);
   al_destroy_event_queue(queue);

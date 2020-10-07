@@ -1,6 +1,11 @@
 #ifndef __ICHIGOJAM_H__
 #define __ICHIGOJAM_H__
 
+#define DIR_UP    0
+#define DIR_RIGHT 1
+#define DIR_DOWN  2
+#define DIR_LEFT  3
+
 typedef struct STD15 STD15;
 struct STD15 {
   int screen_w;
@@ -22,7 +27,7 @@ void ij_putstr(STD15 * self, const char * s);
 void ij_putnum(STD15 * self, int n);
 char ij_scr(STD15 * self, int x ,int y);
 void ij_cls(STD15 * self);
-void ij_scroll(STD15 * self);
+void ij_scroll(STD15 * self, int dir);
 void ij_draw_screen(STD15 * self);
 
 #endif

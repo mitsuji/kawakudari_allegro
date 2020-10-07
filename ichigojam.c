@@ -75,13 +75,38 @@ void ij_cls(STD15 * self) {
   }
 }
 
-void ij_scroll(STD15 * self) {
+void ij_scroll(STD15 * self, int dir) {
   for (int y = 0; y < self->buff_h; y++) {
     for (int x = 0; x < self->buff_w; x++) {
-      if (y == self->buff_h-1) {
-        set_char(self,x,y,'\0');
-      } else {
-        set_char(self,x,y,ij_scr(self,x,y+1));
+      switch (dir) {
+      case DIR_UP :
+	if (y == self->buff_h-1) {
+	  set_char(self,x,y,'\0');
+	} else {
+	  set_char(self,x,y,ij_scr(self,x,y+1));
+	}
+	break;
+      case DIR_RIGHT :
+	if (x == self->buff_w-1) {
+	  set_char(self,(self->buff_w-x-1),y,'\0');
+	} else {
+	  set_char(self,(self->buff_w-x-1),y,ij_scr(self,(self->buff_w-x-1)-1,y));
+	}
+	break;
+      case DIR_DOWN :
+	if (y == self->buff_h-1) {
+	  set_char(self,x,(self->buff_h-y-1),'\0');
+	} else {
+	  set_char(self,x,(self->buff_h-y-1),ij_scr(self,x,(self->buff_h-y-1)-1));
+	}
+	break;
+      case DIR_LEFT :
+	if (x == self->buff_w-1) {
+	  set_char(self,x,y,'\0');
+	} else {
+	  set_char(self,x,y,ij_scr(self,x+1,y));
+	}
+	break;
       }
     }
   }

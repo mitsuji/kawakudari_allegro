@@ -40,7 +40,7 @@ int main()
           ij_putc(std15,'0');
           ij_locate(std15,rand()%32,23);
           ij_putc(std15,'*');
-          ij_scroll(std15);
+          ij_scroll(std15, DIR_UP);
           if (ij_scr(std15,x,5) != '\0') {
 	    ij_locate(std15,0,23);
 	    ij_putstr(std15,"Game Over...");

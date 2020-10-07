@@ -28,6 +28,7 @@ void ij_putnum(STD15 * self, int n);
 char ij_scr(STD15 * self, int x ,int y);
 void ij_cls(STD15 * self);
 void ij_scroll(STD15 * self, int dir);
+void ij_pset(STD15 * self, int x, int y);
 void ij_draw_screen(STD15 * self);
 
 #endif

@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <allegro5/allegro_primitives.h>
 
 static uint64_t ICHIGOJAM_FONT [];
@@ -112,6 +113,15 @@ void ij_scroll(STD15 * self, int dir) {
   }
 }
 
+void ij_pset(STD15 * self, int x, int y) {
+  int cx = x / 2;
+  int cy = y / 2;
+  char c = ij_scr(self,cx,cy);
+  char b = (char)floor(pow(2, ((y % 2) << 1) + (x % 2)));
+  char d = (char)(((c & 0xf0) == 0x80 ? c : 0x80) | b);
+  set_char(self, cx, cy, d);
+}
+
 void ij_draw_screen(STD15 * self) {
   al_clear_to_color(al_map_rgb(0x00, 0x00, 0x00)); // black
   for (int y = 0; y < self->buff_h; y++) {
@@ -129,7 +139,7 @@ static void set_char(STD15 * self, int x, int y, char c) {
 
 static void draw_char(STD15 * self, int cx, int cy, char c)
 {
-  uint64_t font = ICHIGOJAM_FONT[c];
+  uint64_t font = ICHIGOJAM_FONT[(unsigned char)c];
   for (int y = 0; y < CHAR_H; y++) {
     uint64_t line = (font >> ((CHAR_H-y-1)*CHAR_W)) & 0xff;
     for (int x= 0; x < CHAR_W; x++) {

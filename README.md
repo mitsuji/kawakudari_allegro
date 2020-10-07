@@ -2,13 +2,13 @@
 
 This project implements part of the [std15.h](https://github.com/IchigoJam/c4ij/blob/master/src/std15.h) API (from [c4ij](https://github.com/IchigoJam/c4ij)) with [Allegro](https://liballeg.org/), and [Kawakudari Game](https://ichigojam.github.io/print/en/KAWAKUDARI.html) on top of it.
 
-It will allow programming for [IchigoJam](https://ichigojam.net/index-en.html)-like targets using a C programming language.
+It will allow programming for [IchigoJam](https://ichigojam.net/index-en.html)-like targets that display [IchigoJam FONT](https://mitsuji.github.io/ichigojam-font.json/) on screen using a C programming language.
 ```
-  std15_init(512,384,32,24);
+  STD15 * std15 = ij_create_std15(512,384,32,24);
   unsigned int frame = 0;
   int x = 15;
   int running = TRUE;
-  
+
   al_start_timer(timer);
   while(TRUE) {
     ALLEGRO_EVENT event;
@@ -18,14 +18,19 @@ It will allow programming for [IchigoJam](https://ichigojam.net/index-en.html)-l
       if(al_is_event_queue_empty(queue)) {
         if (!running) break;
         if (frame % 5 == 0) {
-          locate(x,5);
-          putc_('0');
-          locate(rand()%32,23);
-          putc_('*');
-          scroll();
-          if (scr(x,5) != '\0') running = FALSE;
+          ij_locate(std15,x,5);
+          ij_putc(std15,'0');
+          ij_locate(std15,rand()%32,23);
+          ij_putc(std15,'*');
+          ij_scroll(std15, DIR_UP);
+          if (ij_scr(std15,x,5) != '\0') {
+	    ij_locate(std15,0,23);
+	    ij_putstr(std15,"Game Over...");
+	    ij_putnum(std15,frame);
+	    running = FALSE;
+	  }
         }
-        draw();
+        ij_draw_screen(std15);
         ++ frame;
       }
       break;
@@ -78,3 +83,10 @@ To run it
 ```
 $ ./kawakudari
 ```
+
+
+## License
+[![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+[CC BY](https://creativecommons.org/licenses/by/4.0/) [mitsuji.org](https://mitsuji.org)
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).

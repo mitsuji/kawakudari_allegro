@@ -58,6 +58,9 @@ It will allow programming for [IchigoJam](https://ichigojam.net/index-en.html)-l
 
 [Download](https://gcc.gnu.org/) and install GCC suitable for your environment.
 
+In Windows enviroment, you might need [install and configure MinGW](https://github.com/liballeg/allegro_wiki/wiki/Quickstart#mingw) to build and run this project.
+
+
 ## Preparation
 
 Adjust contents of Makefile.* to suit your environment.
@@ -68,7 +71,7 @@ BREW_PATH=/Users/mitsuji/apps/homebrew
 
 ## How to use
 
-To build it (Linux)
+To build it (Linux,MinGW)
 ```
 $ make -f Makefile.linux
 ```

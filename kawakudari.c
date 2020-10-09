@@ -13,6 +13,7 @@ int main()
 
   al_init();
   al_install_keyboard();
+  al_init_primitives_addon();
 
   ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
   ALLEGRO_DISPLAY * disp = al_create_display(512, 384);
